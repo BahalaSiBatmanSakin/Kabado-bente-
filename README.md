@@ -433,7 +433,7 @@ function maybeAnswer(){
     const msgs=[
         "Hmm? 🤨",
         "Are you sure? 🌷",
-        "Pretty please? 🥹",
+        "Pretty please?",
         "I'll take that as a maybe. 💗"
     ];
 
