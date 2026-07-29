@@ -5,9 +5,144 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For You 🌷</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
-<style>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="petals"></div>
+
+<!-- Loading -->
+<section id="loading" class="page active">
+    <div class="card">
+        <h1>🌷</h1>
+        <h2>One small page...</h2>
+        <p>made just for you.</p>
+    </div>
+</section>
+
+<!-- Landing -->
+<section id="landing" class="page">
+    <div class="card">
+        <h1>Hi. 🌷</h1>
+
+        <p>
+            I know this is a little unexpected.
+        </p>
+
+        <p>
+            I wanted to ask you something in a way that's
+            a little different.
+        </p>
+
+        <button onclick="showLetter()">
+            Continue →
+        </button>
+    </div>
+</section>
+
+<!-- Letter -->
+<section id="letter" class="page">
+
+<div class="card">
+
+<h1>Before I ask...</h1>
+
+<p id="typing"></p>
+
+<button id="continueBtn" onclick="showQuestion()">
+One more thing 💗
+</button>
+
+</div>
+
+</section>
+
+<!-- Question -->
+
+<section id="question" class="page">
+
+<div class="card">
+
+<h1>📸</h1>
+
+<h2>
+May I steal you
+for a photobooth?
+</h2>
+
+<p>
+Nothing too fancy.
+
+Just you,
+me,
+a tiny booth,
+a couple of goofy poses,
+and a memory I'd love to keep.
+</p>
+
+<div class="buttons">
+
+<button id="yesBtn" onclick="yesAnswer()">
+Yes 💗
+</button>
+
+<button id="maybeBtn" onclick="maybeAnswer()">
+Maybe
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Ending -->
+
+<section id="ending" class="page">
+
+<div class="card">
+
+<h1>🌷</h1>
+
+<h2>
+You just made my day.
+</h2>
+
+<p>
+Thank you for saying yes.
+
+I'm looking forward
+to making our first little
+photobooth memory together.
+🤍
+</p>
+
+<div class="polaroid">
+
+<div class="photo">
+📸
+</div>
+
+<p>
+Reserved for our first
+photobooth picture.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
 *{
 margin:0;
 padding:0;
@@ -15,43 +150,165 @@ box-sizing:border-box;
 font-family:'Poppins',sans-serif;
 }
 
+html,body{
+width:100%;
+min-height:100%;
+overflow-x:hidden;
+background:#ffeef5;
+}
+
 body{
-background:linear-gradient(180deg,#ffd8e8,#fff3f8);
-overflow:hidden;
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
+background:linear-gradient(180deg,#ffd9e8,#fff8fb);
 color:#444;
 }
 
 .page{
-position:absolute;
-width:100%;
-height:100%;
-display:flex;
+display:none;
+min-height:100vh;
+padding:30px 20px;
 justify-content:center;
 align-items:center;
-padding:25px;
-transition:.6s;
 }
 
-.hidden{
-opacity:0;
-pointer-events:none;
-transform:translateY(30px);
+.page.active{
+display:flex;
+animation:fade .7s ease;
 }
 
 .card{
 width:100%;
 max-width:380px;
-background:rgba(255,255,255,.75);
-backdrop-filter:blur(14px);
-border-radius:28px;
-padding:30px;
+background:rgba(255,255,255,.8);
+backdrop-filter:blur(12px);
+border-radius:30px;
+padding:28px;
 text-align:center;
-box-shadow:0 15px 35px rgba(255,105,180,.15);
-animation:fade .8s;
+box-shadow:0 15px 40px rgba(255,105,180,.18);
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:"🌷";
+position:absolute;
+top:15px;
+right:18px;
+font-size:22px;
+opacity:.3;
+}
+
+h1{
+font-family:'Dancing Script',cursive;
+font-size:48px;
+color:#ff5c99;
+margin-bottom:10px;
+}
+
+h2{
+font-size:28px;
+margin-bottom:18px;
+color:#555;
+}
+
+p{
+font-size:15px;
+line-height:1.8;
+margin-bottom:14px;
+}
+
+button{
+border:none;
+outline:none;
+cursor:pointer;
+padding:14px 28px;
+border-radius:999px;
+font-size:16px;
+font-weight:600;
+transition:.35s;
+}
+
+button:hover{
+transform:translateY(-2px);
+}
+
+#continueBtn,
+button:first-child{
+background:#ff6ea8;
+color:white;
+box-shadow:0 10px 20px rgba(255,110,168,.3);
+}
+
+#continueBtn:hover,
+button:first-child:hover{
+background:#ff5b99;
+}
+
+#maybeBtn{
+background:#fff;
+border:2px solid #ffc6dc;
+color:#ff5b99;
+}
+
+.buttons{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:25px;
+flex-wrap:wrap;
+}
+
+.polaroid{
+margin:25px auto 0;
+width:180px;
+background:white;
+padding:10px;
+border-radius:8px;
+box-shadow:0 10px 20px rgba(0,0,0,.12);
+}
+
+.photo{
+height:145px;
+background:#ffe3ee;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:55px;
+border-radius:4px;
+}
+
+.polaroid p{
+font-size:13px;
+margin-top:10px;
+}
+
+#typing{
+min-height:170px;
+text-align:left;
+white-space:pre-line;
+}
+
+#petals{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:-1;
+}
+
+.petal{
+position:absolute;
+font-size:22px;
+animation:fall linear forwards;
+opacity:.35;
+}
+
+@keyframes fall{
+0%{
+transform:translateY(-10vh) rotate(0deg);
+}
+100%{
+transform:translateY(110vh) rotate(360deg);
+}
 }
 
 @keyframes fade{
@@ -65,387 +322,209 @@ transform:translateY(0);
 }
 }
 
+@media(max-width:400px){
+
+.card{
+padding:22px;
+}
+
 h1{
-font-family:'Dancing Script',cursive;
-font-size:46px;
-color:#ff5d97;
-margin-bottom:10px;
+font-size:42px;
 }
 
 h2{
-font-size:28px;
-margin:15px 0;
-color:#555;
+font-size:24px;
 }
 
 p{
-line-height:1.8;
-font-size:15px;
-margin-top:15px;
+font-size:14px;
 }
 
 button{
-margin-top:28px;
-padding:14px 32px;
-border:none;
-border-radius:40px;
-font-size:16px;
-cursor:pointer;
-transition:.3s;
+width:100%;
 }
 
-.primary{
-background:#ff6ea7;
-color:white;
-box-shadow:0 8px 20px rgba(255,110,167,.35);
+.buttons{
+flex-direction:column;
 }
 
-.primary:hover{
-transform:scale(1.05);
+}
+// ===== Pages =====
+const pages = document.querySelectorAll(".page");
+
+function showPage(id){
+    pages.forEach(page => page.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
 }
 
-.secondary{
-background:white;
-color:#ff5d97;
-border:2px solid #ffc3d8;
-}
+// ===== Loading =====
+setTimeout(()=>{
+    showPage("landing");
+},2200);
 
-.tulip{
-position:absolute;
-font-size:26px;
-opacity:.25;
-animation:float linear infinite;
-}
-
-@keyframes float{
-0%{
-transform:translateY(120vh) rotate(0deg);
-}
-100%{
-transform:translateY(-120px) rotate(360deg);
-}
-}
-
-.loadingText{
-font-size:20px;
-font-weight:500;
-animation:pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-50%{
-opacity:.5;
-}
-}
-</style>
-</head>
-
-<body>
-
-<div id="flowers"></div>
-
-<!-- Loading -->
-
-<div class="page" id="loading">
-
-<div class="card">
-
-<h1>🌷</h1>
-
-<div class="loadingText">
-One small page,<br>
-made just for you.
-</div>
-
-</div>
-
-</div>
-
-<!-- Landing -->
-
-<div class="page hidden" id="landing">
-
-<div class="card">
-
-<h1>Hi. 🌷</h1>
-
-<p>
-I know this is a little unexpected.
-</p>
-
-<p>
-I wanted to ask you something in a way that's a bit different.
-Not because I had to...
-I just thought you'd deserve something a little more thoughtful.
-</p>
-
-<button class="primary" onclick="openLetter()">
-Continue →
-</button>
-
-</div>
-
-</div>
-
-<!-- Letter -->
-
-<div class="page hidden" id="letter">
-
-<div class="card">
-
-<h1>Before I ask...</h1>
-
-<p id="typeText"></p>
-
-<button class="primary" id="nextBtn" style="display:none;" onclick="openQuestion()">
-One more thing... 💗
-</button>
-
-</div>
-
-</div>
-
-<script>
-
-const message=`I just wanted to say thank you.
+// ===== Letter =====
+const letter = `I just wanted to say thank you.
 
 Thank you for being someone who's genuinely easy to appreciate.
 
-Whether it's the little things you do or simply the kind of person you are, you've made more moments brighter than you probably realize.
+Whether it's your kindness, the little things you do, or simply the way you are, you've made more moments brighter than you probably realize.
 
 I'm really glad I got the chance to know you.
 
-So... there's one small thing I'd like to ask.`;
+So... there's one small thing I'd like to ask. 🌷`;
 
-function show(id){
-document.querySelectorAll(".page").forEach(p=>p.classList.add("hidden"));
-document.getElementById(id).classList.remove("hidden");
-}
+function showLetter(){
 
-setTimeout(()=>{
-show("landing");
-},2500);
+    showPage("letter");
 
-function openLetter(){
-show("letter");
+    const typing=document.getElementById("typing");
+    const btn=document.getElementById("continueBtn");
 
-let i=0;
+    typing.innerHTML="";
+    btn.style.display="none";
 
-const target=document.getElementById("typeText");
+    let i=0;
 
-const timer=setInterval(()=>{
+    const speed=28;
 
-target.innerHTML+=message.charAt(i);
+    const timer=setInterval(()=>{
 
-i++;
+        typing.innerHTML+=letter.charAt(i);
 
-if(i>=message.length){
+        i++;
 
-clearInterval(timer);
+        if(i>=letter.length){
 
-document.getElementById("nextBtn").style.display="inline-block";
+            clearInterval(timer);
 
-}
+            btn.style.display="inline-block";
 
-},28);
+        }
+
+    },speed);
 
 }
 
-function flower(){
+function showQuestion(){
+    showPage("question");
+}
 
-const f=document.createElement("div");
+// ===== Maybe Button =====
 
-f.className="tulip";
+let clicks=0;
 
-f.innerHTML=Math.random()>.5?"🌷":"🌸";
+function maybeAnswer(){
 
-f.style.left=Math.random()*100+"vw";
+    clicks++;
 
-f.style.animationDuration=(8+Math.random()*6)+"s";
+    const yes=document.getElementById("yesBtn");
+    const maybe=document.getElementById("maybeBtn");
 
-f.style.fontSize=(20+Math.random()*18)+"px";
+    // Yes grows
+    yes.style.transform=`scale(${1+(clicks*0.18)})`;
 
-document.body.appendChild(f);
+    // Maybe shrinks
+    maybe.style.transform=`scale(${1-(clicks*0.18)})`;
 
-setTimeout(()=>{
+    // Maybe fades
+    maybe.style.opacity=1-(clicks*0.25);
 
-f.remove();
+    // Cute messages
+    const msgs=[
+        "Hmm? 🤨",
+        "Are you sure? 🌷",
+        "Pretty please? 🥹",
+        "I'll take that as a maybe. 💗"
+    ];
 
-},15000);
+    if(clicks<=msgs.length){
+        maybe.innerText=msgs[clicks-1];
+    }
+
+    if(clicks>=4){
+
+        maybe.style.transition=".5s";
+        maybe.style.opacity="0";
+
+        setTimeout(()=>{
+            maybe.style.display="none";
+        },500);
+
+    }
 
 }
 
-setInterval(flower,700);
+// ===== Yes =====
 
-function openQuestion(){
+function yesAnswer(){
 
-show("question");
+    showPage("ending");
 
-}
-
-</script>
-
-<!-- Question -->
-
-<div class="page hidden" id="question">
-
-<div class="card">
-
-<h1>🌷</h1>
-
-<h2>May I steal you for a photobooth?</h2>
-
-<p>
-Nothing too fancy.
-
-Just you, me, a tiny booth, a couple of goofy poses,
-and a memory I'd love to keep.
-</p>
-
-<div style="display:flex;justify-content:center;gap:15px;margin-top:30px;">
-
-<button id="yesBtn" class="primary" onclick="yesClicked()">
-Yes 💗
-</button>
-
-<button id="maybeBtn" class="secondary" onclick="maybeClicked()">
-Maybe
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- Ending -->
-
-<div class="page hidden" id="ending">
-
-<div class="card">
-
-<h1>🌷</h1>
-
-<h2>You just made my day.</h2>
-
-<p>
-Thank you for saying yes.
-
-I'm looking forward to making
-our first little photobooth memory together.
-
-I hope it's something we'll both smile about whenever we look back at it.
-🤍
-</p>
-
-<div style="
-margin:25px auto;
-width:170px;
-background:white;
-padding:10px;
-border-radius:8px;
-box-shadow:0 8px 20px rgba(0,0,0,.15);
-">
-
-<div style="
-height:140px;
-background:#ffe5ef;
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:48px;
-">
-📸
-</div>
-
-<p style="font-size:13px;margin-top:10px;">
-Reserved for our first photobooth picture.
-</p>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-let maybeCount=0;
-
-function maybeClicked(){
-
-maybeCount++;
-
-const yes=document.getElementById("yesBtn");
-const maybe=document.getElementById("maybeBtn");
-
-yes.style.transform=`scale(${1+maybeCount*0.18})`;
-
-maybe.style.transform=`scale(${1-maybeCount*0.18})`;
-
-maybe.style.opacity=1-(maybeCount*0.25);
-
-if(maybeCount>=4){
-
-maybe.style.transition=".5s";
-
-maybe.style.opacity="0";
-
-setTimeout(()=>{
-
-maybe.style.display="none";
-
-},500);
+    confetti();
 
 }
 
-}
-
-function yesClicked(){
-
-show("ending");
-
-confetti();
-
-}
+// ===== Tulip Confetti =====
 
 function confetti(){
 
-for(let i=0;i<120;i++){
+    for(let i=0;i<120;i++){
 
-const c=document.createElement("div");
+        const petal=document.createElement("div");
 
-c.innerHTML=Math.random()>.5?"🌸":"🌷";
+        petal.innerHTML=Math.random()>.5?"🌷":"🌸";
 
-c.style.position="fixed";
-c.style.left=Math.random()*100+"vw";
-c.style.top="-20px";
-c.style.fontSize=(16+Math.random()*18)+"px";
-c.style.transition="4s linear";
+        petal.style.position="fixed";
+        petal.style.left=Math.random()*100+"vw";
+        petal.style.top="-30px";
+        petal.style.fontSize=(18+Math.random()*18)+"px";
+        petal.style.transition="4s linear";
 
-document.body.appendChild(c);
+        document.body.appendChild(petal);
 
-setTimeout(()=>{
+        setTimeout(()=>{
 
-c.style.transform=`translateY(${window.innerHeight+150}px) rotate(${Math.random()*720}deg)`;
+            petal.style.transform=
+            `translateY(${window.innerHeight+100}px)
+            rotate(${Math.random()*720}deg)`;
 
-},50);
+        },50);
 
-setTimeout(()=>{
+        setTimeout(()=>{
 
-c.remove();
+            petal.remove();
 
-},4000);
+        },4000);
 
-}
-
-}
-
-</script>
-
-</body>
-</html>
+    }
 
 }
 
-</script>
+// ===== Floating Background Tulips =====
+
+function floatingPetal(){
+
+    const petal=document.createElement("div");
+
+    petal.className="petal";
+
+    petal.innerHTML=Math.random()>.5?"🌷":"🌸";
+
+    petal.style.left=Math.random()*100+"vw";
+
+    petal.style.animationDuration=
+    (8+Math.random()*5)+"s";
+
+    petal.style.fontSize=
+    (18+Math.random()*18)+"px";
+
+    document.getElementById("petals")
+    .appendChild(petal);
+
+    setTimeout(()=>{
+        petal.remove();
+    },13000);
+
+}
+
+setInterval(floatingPetal,700);
